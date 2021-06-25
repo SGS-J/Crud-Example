@@ -1,20 +1,26 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "./components/Form.jsx";
+import DataTable from "./components/DataTable.jsx";
 
 export default function App() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
-  const [id, setId] = useState();
+  const [count, setCount] = useState(0);
+  const [actualState, setActualState] = useState("normal");
 
+  // Functions
   const updateData = async () => {
     const res = await fetch("/api");
-    const newData = res.json();
+    const newData = await res.json();
     setData(newData);
   };
 
+  useEffect(() => {
+    updateData();
+  }, [count]);
+
+  // Handlers
   const handleChange = (e) => {
     const type = e.target.name;
     const value = e.target.value;
@@ -38,17 +44,48 @@ export default function App() {
         age: Number(age),
       }),
     });
-    await updateData();
+    setName("");
+    setAge("");
+    setCount(count + 1);
+  };
+
+  const handleDelete = async (id) => {
+    await fetch("/api", {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+    setCount(count + 1);
+  };
+
+  const handleEdit = async (newData) => {
+    await fetch("/api", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newData),
+    });
+    setCount(count + 1);
   };
 
   return (
-    <main className="container">
-      <Form
-        valueName={name}
-        valueAge={age}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
+    <main className="row">
+      <div className="col">
+        <Form
+          valueName={name}
+          valueAge={age}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      </div>
+      <div className="col">
+        <DataTable data={data} onDelete={handleDelete} onEdit={handleEdit} />
+      </div>
     </main>
   );
 }

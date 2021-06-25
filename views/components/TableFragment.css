@@ -1,0 +1,21 @@
+.input-normal {
+  border: none;
+  cursor: default;
+  transition: 0.1s;
+}
+
+.input-normal:focus {
+  border: none;
+  outline: none;
+}
+
+.input-updating {
+  border: none;
+  border-bottom: 1px solid #aaff;
+}
+
+.input-updating:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #88ff;
+}

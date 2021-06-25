@@ -8,7 +8,6 @@ router.get("/api", async (req, res) => {
 });
 
 router.post("/api", async (req, res) => {
-  console.log(req.body);
   const { name, age } = req.body;
   const doc = new UserModel({
     name,
