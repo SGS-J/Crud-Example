@@ -6,7 +6,7 @@ export default function App() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
-  const [lastMethod, setLastMethod] = useState("GET");
+  const [events, setEvents] = useState(1);
 
   // Functions
   const updateData = async () => {
@@ -17,7 +17,7 @@ export default function App() {
 
   useEffect(() => {
     updateData();
-  }, [lastMethod]);
+  }, [events]);
 
   // Handlers
   const handleChange = (e) => {
@@ -45,7 +45,7 @@ export default function App() {
     });
     setName("");
     setAge("");
-    setLastMethod("POST");
+    setEvents(events + 1)
   };
 
   const handleDelete = async (id) => {
@@ -58,7 +58,7 @@ export default function App() {
         id: id,
       }),
     });
-    setLastMethod("DELETE");
+    setEvents(events + 1)
   };
 
   const handleEdit = async (newData) => {
@@ -69,7 +69,7 @@ export default function App() {
       },
       body: JSON.stringify(newData),
     });
-    setLastMethod("PUT");
+    setEvents(events + 1)
   };
 
   return (

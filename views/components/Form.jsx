@@ -8,6 +8,7 @@ export default function Form({ valueName, valueAge, onChange, onSubmit }) {
         <input
           type="text"
           name="name"
+          required
           value={valueName}
           className="form-control"
           onChange={(e) => onChange(e)}
@@ -18,6 +19,7 @@ export default function Form({ valueName, valueAge, onChange, onSubmit }) {
         <input
           type="number"
           name="age"
+          required
           value={valueAge}
           className="form-control"
           onChange={(e) => onChange(e)}
