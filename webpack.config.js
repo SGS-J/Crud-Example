@@ -18,6 +18,11 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
       },
+      {
+        use: "svg-url-loader",
+        test: /\.svg$/,
+        exclude: /node_modules/,
+      },
     ],
   },
 };

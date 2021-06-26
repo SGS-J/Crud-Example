@@ -19,3 +19,19 @@
   outline: none;
   border-bottom: 1px solid #88ff;
 }
+
+.action-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.action-box button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 47%;
+  height: 48%;
+}

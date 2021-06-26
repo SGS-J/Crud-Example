@@ -45,7 +45,7 @@ export default function App() {
     });
     setName("");
     setAge("");
-    setEvents(events + 1)
+    setEvents(events + 1);
   };
 
   const handleDelete = async (id) => {
@@ -58,7 +58,7 @@ export default function App() {
         id: id,
       }),
     });
-    setEvents(events + 1)
+    setEvents(events + 1);
   };
 
   const handleEdit = async (newData) => {
@@ -69,7 +69,7 @@ export default function App() {
       },
       body: JSON.stringify(newData),
     });
-    setEvents(events + 1)
+    setEvents(events + 1);
   };
 
   return (

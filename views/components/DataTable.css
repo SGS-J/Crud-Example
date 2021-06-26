@@ -1,0 +1,28 @@
+.table-wrapper {
+  position: relative;
+  border: 1px solid #0004;
+  border-radius: 1%;
+  box-shadow: inset 1px 0 3px #0004;
+  padding: 0.2rem;
+  width: 35rem;
+  height: 25rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  width: 1em;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #0d6efd88;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 1ex;
+  background: #0d6efd;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #0d6ea9;
+}
