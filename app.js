@@ -1,16 +1,17 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const logger = require("morgan");
 
-const indexRouter = require('./routes/index.router');
+const graphqlHTTP = require("./graphql/init");
+
 const app = express();
-const db = require('./database')
+const db = require("./database");
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', indexRouter);
+app.use("/api", graphqlHTTP);
 
 module.exports = app;

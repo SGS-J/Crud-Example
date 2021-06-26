@@ -1,0 +1,16 @@
+type User {
+  _id: ID!
+  name: String!
+  age: Int!
+}
+
+input UserAddInput {
+  name: String!
+  age: Int!
+}
+
+input UserEditInput {
+  id: ID!
+  name: String
+  age: Int
+}

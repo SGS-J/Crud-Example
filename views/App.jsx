@@ -10,8 +10,26 @@ export default function App() {
 
   // Functions
   const updateData = async () => {
-    const res = await fetch("/api");
-    const newData = await res.json();
+    const res = await fetch("/api", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+          {
+            getUsers {
+              _id
+              name
+              age
+            }
+          }
+        `,
+      }),
+    });
+    const {
+      data: { getUsers: newData },
+    } = await res.json();
     setData(newData);
   };
 
@@ -36,11 +54,19 @@ export default function App() {
     await fetch("/api", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        age: Number(age),
+        query: `
+          mutation {
+            createUser(newUser: {
+              name: "${name}"
+              age: ${Number(age)}
+            }) {
+              name
+            }
+          }
+        `,
       }),
     });
     setName("");
@@ -50,12 +76,18 @@ export default function App() {
 
   const handleDelete = async (id) => {
     await fetch("/api", {
-      method: "DELETE",
+      method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        id: id,
+        query: `
+          mutation {
+            deleteUser(id: "${id}") {
+              name
+            }
+          } 
+        `,
       }),
     });
     setEvents(events + 1);
@@ -63,11 +95,23 @@ export default function App() {
 
   const handleEdit = async (newData) => {
     await fetch("/api", {
-      method: "PUT",
+      method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newData),
+      body: JSON.stringify({
+        query: `
+          mutation {
+            editUser(newUserValues: {
+              id: "${newData.id}"
+              name: "${newData.name}"
+              age: ${Number(newData.age)}
+            }) {
+              name
+            }
+          }
+        `,
+      }),
     });
     setEvents(events + 1);
   };
